@@ -1,1 +1,2 @@
-# Web and mobile progamming 2019
+# Web and mobile programming 2019
+#HTML #JavaScript #React
