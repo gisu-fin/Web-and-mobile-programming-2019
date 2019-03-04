@@ -3,56 +3,52 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class App extends React.Component {
-    constructor() {
-      super()
+    constructor(props) {
+      super(props)
       this.state = {
-        counter: 1
+        hyva: 0,
+        neutraali: 0,
+        huono: 0
       }
     }
-  
-    asetaArvoon = (arvo) => {
-      return () => {
-        this.setState({ counter: arvo })
-      }
+
+    klikHyva = () => {
+        this.setState({
+            hyva: this.state.hyva +1
+        })
+    }
+
+    klikNeutraali = () => {
+        this.setState({
+            neutraali: this.state.neutraali +1
+        })
+    }
+
+    klikHuono = () => {
+        this.setState({
+            huono: this.state.huono +1
+        })
     }
   
     render() {
-      return (
-        <div>
-          <Display counter =  {this.state.counter}/>
-          <div>
-            <Button 
-                handleClick={this.asetaArvoon(this.state.counter + 1)}
-                text = "Plus"
-            />
-            <Button 
-                handleClick={this.asetaArvoon(this.state.counter - 1)}
-                text = "Miinus"
-            />
-            <Button 
-                handleClick={this.asetaArvoon(0)}
-                text = "Nollaa"
-            />
-          </div>
-        </div>
+
+        return (
+            <div>
+                <h1>Anna palautetta</h1>
+                    <button onClick={this.klikHyva}>hyvä</button>
+                    <button onClick={this.klikNeutraali}>neutraali</button>
+                    <button onClick={this.klikHuono}>huono</button>
+                    
+                <h1>Statistiikka</h1>
+                    <p> Hyvä {this.state.hyva}</p>
+                    <p> Neutraali {this.state.neutraali}</p>
+                    <p> Huono {this.state.huono}</p>
+                        
+            </div>
+
       )
     }
   }
-
-  const Display = (counter) => {
-    return (
-      <div>{counter}</div>
-    )
-  }
-
-  const Button = ({ handleClick, text }) => (
-    <button onClick={handleClick}>
-      {text}
-    </button>
-  )
-
-
-  
 
   ReactDOM.render(
     <App />,
