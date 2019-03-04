@@ -23,6 +23,22 @@ const Statistic = (props) => (
     
 )
 
+const Historia = ({hyva, neutraali, huono, keski, prosentti,kaikki}) => {
+    if (kaikki === 0){
+        return(
+            <div>
+                <p>Yhtään palautetta ei ole annettu</p>
+            </div>
+        )
+    }
+    return (
+            <div>
+                <Statistics hyva={hyva} neutraali={neutraali} huono={huono} keski={keski} prosentti={prosentti}/>
+            </div>
+    )
+
+}
+
 class App extends React.Component {
     constructor(props) {
       super(props)
@@ -68,7 +84,10 @@ class App extends React.Component {
                     <Button handleClick={this.klikHuono} text = "huono"/>
                     
                 <h1>Statistiikka</h1>
-                    <Statistics hyva={hyva} neutraali={neutraali} huono={huono} keski={keski} prosentti={prosentti}/>
+                    <div>
+                        <Historia kaikki={kaikki} hyva={hyva} neutraali={neutraali} huono={huono} keski={keski} prosentti={prosentti}/>
+                    </div>
+                    
             </div>
 
       )
