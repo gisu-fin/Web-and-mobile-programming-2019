@@ -50,13 +50,13 @@ const App = () => {
                 exercises: 12
             }
         ]
-    }
+    }    
 
     return (
         <div>
-            <Header course = {course} />
+            <Header course = {course}/>
             <Contents parts = {course.parts} />
-            <Total parts = {course.parts} />
+            <Total parts = {course.parts}/>
         </div>
     )
 }
