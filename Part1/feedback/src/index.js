@@ -2,6 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+const Button = ({handleClick, text}) => (
+    <button onClick = {handleClick}>
+        {text}
+    </button>
+)
+
+const Statistics = ({hyva, neutraali, huono, keski, prosentti}) => (
+    <div>   
+        <Statistic text="Hyvä" counter={hyva} />
+        <Statistic text="Neutraali" counter={neutraali} />
+        <Statistic text="Huono" counter={huono} />
+        <Statistic text="Keskiarvo" counter={keski}/>
+        <Statistic text= "Positiivisia" counter={prosentti} /> 
+    </div>
+)
+
+const Statistic = (props) => (
+        <p>{props.text} {props.counter}</p>
+    
+)
+
 class App extends React.Component {
     constructor(props) {
       super(props)
@@ -29,29 +50,25 @@ class App extends React.Component {
             huono: this.state.huono +1
         })
     }
-
-    kaikki = () => {
-        this.setState({
-            yht: this.state.yht +1
-        })
-    }
   
     render() {
+        //sijoitetaan nämä tänne olettaen että päivittyvät paremmin
+        const {hyva, neutraali, huono} = this.state
+        const kaikki = (hyva + neutraali + huono) 
+        //lasketaan keskiarvo
+        const keski = ((hyva*1 + neutraali*0 + huono*(-1))/kaikki).toFixed(2)
+        //lasketaan hyvien prosenttiosuus
+        const prosentti = ((hyva/kaikki)*100).toFixed(2)+"%"
 
         return (
             <div>
                 <h1>Anna palautetta</h1>
-                    <button onClick={this.klikHyva}>hyvä</button>
-                    <button onClick={this.klikNeutraali}>neutraali</button>
-                    <button onClick={this.klikHuono}>huono</button>
+                    <Button handleClick={this.klikHyva} text = "hyvä"/>
+                    <Button handleClick={this.klikNeutraali} text = "neutraali"/>
+                    <Button handleClick={this.klikHuono} text = "huono"/>
                     
                 <h1>Statistiikka</h1>
-                    <p> Hyvä {this.state.hyva}</p>
-                    <p> Neutraali {this.state.neutraali}</p>
-                    <p> Huono {this.state.huono}</p>
-                    <p> Kaikki {this.state.hyva + this.state.neutraali + this.state.huono}</p>
-                    <p> Keskiarvo {(this.state.hyva * 1 + this.state.neutraali * 0 + this.state.huono * (-1))/ (this.state.hyva + this.state.neutraali + this.state.huono)} </p>
-                    <p> Positiivisia {this.state.hyva/(this.state.hyva + this.state.neutraali + this.state.huono)*100}% </p>    
+                    <Statistics hyva={hyva} neutraali={neutraali} huono={huono} keski={keski} prosentti={prosentti}/>
             </div>
 
       )
