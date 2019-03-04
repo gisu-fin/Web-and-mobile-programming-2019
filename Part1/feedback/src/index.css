@@ -1,6 +1,6 @@
 div {
   margin: 500;
-  padding: 100;
+  padding-left: 10px;
   color: black;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -10,7 +10,18 @@ div {
 }
 
 h1 {
-  color: midnightblue
+  color: midnightblue;
+}
+
+button {
+   border-radius: 15px;  
+   padding: 10px;
+   margin: 10px;
+   background-color:rgb(208, 230, 238);
+}
+
+table {
+    border-spacing: 10px
 }
 
 code {
