@@ -29,6 +29,12 @@ class App extends React.Component {
             huono: this.state.huono +1
         })
     }
+
+    kaikki = () => {
+        this.setState({
+            yht: this.state.yht +1
+        })
+    }
   
     render() {
 
@@ -43,7 +49,9 @@ class App extends React.Component {
                     <p> Hyvä {this.state.hyva}</p>
                     <p> Neutraali {this.state.neutraali}</p>
                     <p> Huono {this.state.huono}</p>
-                        
+                    <p> Kaikki {this.state.hyva + this.state.neutraali + this.state.huono}</p>
+                    <p> Keskiarvo {(this.state.hyva * 1 + this.state.neutraali * 0 + this.state.huono * (-1))/ (this.state.hyva + this.state.neutraali + this.state.huono)} </p>
+                    <p> Positiivisia {this.state.hyva/(this.state.hyva + this.state.neutraali + this.state.huono)*100}% </p>    
             </div>
 
       )
