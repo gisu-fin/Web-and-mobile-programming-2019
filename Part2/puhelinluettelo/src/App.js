@@ -4,8 +4,9 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      persons: [ { name: 'Arto Hellas' } ],
-      newName: ''
+      persons: [ { name: 'Arto Hellas', number: 123441 } ],
+      newName: '',
+      newNumber: ''
     }
   } //constructor  
 
@@ -23,15 +24,17 @@ class App extends React.Component {
     }
     else {
     
-    const nameObject = {
-      name: this.state.newName
+    const newPerson = {
+      name: this.state.newName,
+      number: this.state.newNumber
     }
 
-    const persons = this.state.persons.concat(nameObject)
+    const persons = this.state.persons.concat(newPerson)
 
     this.setState ({
       persons:persons,
-      newName: ' '
+      newName: ' ',
+      newNumber: ' '
     })
   }//else
   }//addName
@@ -40,6 +43,11 @@ class App extends React.Component {
     console.log(event.target.value)
     this.setState({ newName: event.target.value })
   }//handle add name
+
+  handleAddNumber = (event) => {
+    console.log ('luku')
+    this.setState({newNumber: event.target.value})
+  }
 
 
   render() {
@@ -55,12 +63,20 @@ class App extends React.Component {
             />
           </div>
           <div>
+            Numero: <input 
+              value = {this.state.newNumber}
+              onChange = {this.handleAddNumber}
+            />
+          </div>
+
+
+          <div>
             <button type="submit">Lisää</button>
           </div>
         </form>
         <h2>Nimet</h2>        
         <ul>
-          {this.state.persons.map(person => <li key={person.name}>{person.name}</li>)}
+          {this.state.persons.map(person => <li key={person.name}>Nimi: {person.name} Numero: {person.number} </li>)}
         </ul>
        
 
