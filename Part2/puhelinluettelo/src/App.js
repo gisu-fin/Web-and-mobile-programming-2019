@@ -11,9 +11,18 @@ class App extends React.Component {
 
   addName = (event) => {
     event.preventDefault()
-    console.log('nappia painettu')
+    console.log('Nappia painettu!')
     console.log(event.target)
 
+    //checking if name already exists
+    if (this.state.persons.map (person => person.name).includes(this.state.newName) === true){
+      alert (this.state.newName + ' on jo olemassa, lisää uusi nimi')
+      this.setState({
+        newName: ''
+      })
+    }
+    else {
+    
     const nameObject = {
       name: this.state.newName
     }
@@ -24,7 +33,7 @@ class App extends React.Component {
       persons:persons,
       newName: ' '
     })
-
+  }//else
   }//addName
 
   handleAddName = (event) => {
@@ -32,21 +41,21 @@ class App extends React.Component {
     this.setState({ newName: event.target.value })
   }//handle add name
 
+
   render() {
 
     return (
       <div>
         <h2>Puhelinluettelo</h2>
-        <form 
-        onSubmit = {this.addName}>
+        <form onSubmit = {this.addName}>
           <div>
-            nimi: <input 
+            Nimi: <input 
               value = {this.state.newName}
               onChange = {this.handleAddName}
             />
           </div>
           <div>
-            <button type="submit">lisää</button>
+            <button type="submit">Lisää</button>
           </div>
         </form>
         <h2>Nimet</h2>        
