@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import Form from './components/Form';
 
 
 /*const Form = ( props ) => { 
@@ -25,6 +26,25 @@ import axios from 'axios'
           </form>
   )
   }
+
+  <form onSubmit = {this.addPerson}>
+          <div>
+            Nimi: <input 
+              value = {this.state.newName}
+              onChange = {this.handleAddName}
+            />
+          </div>
+          <div>
+            Numero: <input 
+              value = {this.state.newNumber}
+              onChange = {this.handleAddNumber}
+            />
+          </div>
+
+          <div>
+            <button type="submit">Lisää</button>
+          </div>
+        </form>
   */
 /*
 const Nimet = ({props}) => {
@@ -158,24 +178,13 @@ class App extends React.Component {
     return (
       <div>
         <h2>Puhelinluettelo</h2>
-        <form onSubmit = {this.addPerson}>
-          <div>
-            Nimi: <input 
-              value = {this.state.newName}
-              onChange = {this.handleAddName}
-            />
-          </div>
-          <div>
-            Numero: <input 
-              value = {this.state.newNumber}
-              onChange = {this.handleAddNumber}
-            />
-          </div>
-
-          <div>
-            <button type="submit">Lisää</button>
-          </div>
-        </form>
+        
+        <Form
+          state = {this.state}
+          handleAddName = {this.handleAddName}
+          handleAddNumber = {this.handleAddNumber}
+          addPerson = {this.addPerson}
+        />
 
       
         <h2>Nimet</h2>        
