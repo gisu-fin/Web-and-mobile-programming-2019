@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Form from './components/Form';
+import People from './components/People';
 
 
 /*const Form = ( props ) => { 
@@ -188,16 +189,11 @@ class App extends React.Component {
 
       
         <h2>Nimet</h2>        
-        <table>
-          <tbody>
-          {this.state.persons.map(person => 
-            <tr key={person.name}>
-            <td>{person.name}  </td>
-            <td>{person.number} </td>
-            <td><button onClick = {this.deletePerson.bind(this, person.id)}>Poista</button></td>
-            </tr>)}
-            </tbody>
-        </table>  
+        
+        <People
+          state = {this.state}
+          deletePerson = {this.deletePerson}
+        />
       
       </div> 
 
