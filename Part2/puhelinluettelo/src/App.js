@@ -3,67 +3,6 @@ import axios from 'axios'
 import Form from './components/Form';
 import People from './components/People';
 
-
-/*const Form = ( props ) => { 
-  return(    
-  <form onSubmit = {onSubmit} >
-            <div>
-              Nimi: <input 
-                value = {newName}
-                onChange = {handleAddName}
-              />
-            </div>
-            <div>
-              Numero: <input 
-                value = {newNumber}
-                onChange = {handleAddNumber}
-              />
-            </div>
-  
-  
-            <div>
-              <button type="submit">Lisää</button>
-            </div>
-          </form>
-  )
-  }
-
-  <form onSubmit = {this.addPerson}>
-          <div>
-            Nimi: <input 
-              value = {this.state.newName}
-              onChange = {this.handleAddName}
-            />
-          </div>
-          <div>
-            Numero: <input 
-              value = {this.state.newNumber}
-              onChange = {this.handleAddNumber}
-            />
-          </div>
-
-          <div>
-            <button type="submit">Lisää</button>
-          </div>
-        </form>
-  */
-/*
-const Nimet = ({props}) => {
-  return( 
-  <div>  
-  <h2>Nimet</h2>        
-        <table>
-          {props.state.persons.map(person => 
-            <tr key={person.name}>
-            <td>{person.name}  </td>
-            <td>{person.number} </td>
-            </tr>)}
-        </table> 
-    </div>      
-  )
-}
-*/
-
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -94,17 +33,17 @@ class App extends React.Component {
 
     let persons = this.state.persons
 
-    //checking if name already exists ei jostain syystä toimi kuin vasta toisella kerralla
-    // kokeiltu (this.state.persons.filter(person => person.name === this.state.newName).length > 0)
-    //          (this.state.persons.map (person => person.name).includes(this.state.newName) === true)
+    //tarkistetaan onko nimi jo olemassa
     if (persons.map (person => person.name).includes(this.state.newName) === true){
         console.log('iffin sisällä ' + this.state.newName)
         alert (this.state.newName + ' on jo olemassa, lisää uusi nimi')
         this.setState({
-          newName: ''
+          newName: '',
+          newNumber: ''
         })
       
     }
+    
     else {
       console.log (this.state.newName + ' else')
       axios
@@ -120,21 +59,8 @@ class App extends React.Component {
         })
       })
       .catch(error => { console.log(error) })
+    }//else
 
-      /*
-      const newPerson = {
-        name: this.state.newName,
-        number: this.state.newNumber
-      }
-      
-      persons = this.state.persons.concat(newPerson)
-
-      this.setState ({
-        persons:persons,
-        newName: ' ',
-        newNumber: ' '
-      })*/
-  }//else
   }//addName
 
   handleAddName = (event) => {
@@ -150,28 +76,18 @@ class App extends React.Component {
   deletePerson = (id) => {
     console.log ('poistossa')
 
-  /*
-    const newPersons = Object.assign([], this.state.newPersons)
-    newPersons.splice(id,1)
-    this.setState({newPersons:newPersons})
-  */
-    const currentPerson = this.state.persons.find(person => person.id === id);
-    if (window.confirm('Poistetaanko ' + currentPerson.name + '?')) {
-      axios.delete('http://localhost:3001/persons/' + id)
-        .then(res => {
-          const oldPersons = [...this.state.persons];
-          const index = oldPersons.indexOf(currentPerson);
-          if (index !== -1) {
-            oldPersons.splice(index, 1);
-            this.setState({ persons: oldPersons });
-          }
+    const thisDude = this.state.persons.find(person => person.id === id);
+    if (window.confirm('Poistetaanko ' + thisDude.name + '?')) {
+      axios
+        .delete('http://localhost:3001/persons/' + id)
+        .then (response => {
+            const people = this.state.persons.filter( person => person.id !== thisDude.id )
+            this.setState({
+              persons: people
+            })
         })
-        .catch(err => { console.log(err) })
-    }
-    
-
-  }
-
+    }//if
+  }//delete
 
 
   render() {
@@ -186,7 +102,6 @@ class App extends React.Component {
           handleAddNumber = {this.handleAddNumber}
           addPerson = {this.addPerson}
         />
-
       
         <h2>Nimet</h2>        
         

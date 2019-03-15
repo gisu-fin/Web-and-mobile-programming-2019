@@ -10,7 +10,7 @@ const People = ({state, deletePerson}) => {
                 <tr key={person.name}>
                     <td>{person.name}  </td>
                     <td>{person.number} </td>
-                    <td><button onClick = {deletePerson.bind(person.id)}>Poista</button></td>
+                    <td><button id='del' onClick = {deletePerson.bind(this, person.id)}>Poista</button></td>
                 </tr>
             )}
         </tbody>

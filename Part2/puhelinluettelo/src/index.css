@@ -9,20 +9,41 @@ div {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
+h2 {
   color: midnightblue;
   font-style: italic;
 }
 
+form {
+  margin: 100;
+  padding: 10px;
+  line-height: 2em;
+  display: inline-block;
+  clear: left;
+  width: 250px;
+  text-align: right;
+}
+
+input {
+  display: inline-block;
+}
+
 button {
-   border-radius: 15px;  
+   border-radius: 10px;  
    padding: 10px;
-   margin: 10px;
-   background-color:rgb(208, 230, 238);
+   margin: 7px;
+   background-color:rgb(160, 190, 201);
+   border-color: rgb(129, 122, 148);
+}
+
+#del {
+    background-color: rgb(230, 137, 137);
+    border-color: black;
+    border-radius: 5px
 }
 
 table {
-    border-spacing: 10px
+    border-spacing: 5px
 }
 
 code {
