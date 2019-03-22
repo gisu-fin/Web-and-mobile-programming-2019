@@ -2,6 +2,9 @@ console.log ('Moro')
 
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
+
+app.use(bodyParser.json())
 
 let persons = [
       {
@@ -31,7 +34,7 @@ app.get('/', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
 
-app.get('/persons', (req, res) => {
+app.get('/api/persons', (req, res) => {
   res.json(persons)
 })
 
@@ -44,6 +47,29 @@ app.get('/persons/:id', (request, response) => {
       } else {
         response.status(404).end()
     }
+})
+
+const generateId = () => {
+    const id = Math.floor(Math.random()*1000)+1 
+    return id
+}
+  
+app.post('/api/persons', (request, response) => {
+    const body = request.body
+    console.log(request)
+    if (body.name === undefined) {
+      return response.status(400).json({error: 'content missing'})
+    }
+  
+    const person = {
+      name: body.name,
+      number: body.number,
+      id: generateId()
+    }
+  
+    persons = persons.concat(person)
+  
+    response.json(person)
 })
 
 app.delete('/persons/:id', (request, response) => {
